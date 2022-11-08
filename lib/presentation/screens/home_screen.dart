@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import '../router/app_router.dart';
+import '../widgets/shared widgets/MyDrawer.dart';
 import '../widgets/shared widgets/defaultContainer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -7,7 +9,8 @@ class HomeScreen extends StatelessWidget {
   final List<Map> categories = [
     {
       'name':"Coastal Excursions",
-      'imageUrl':"https://images.prismic.io/mystique/24d6af7e-53ba-47c4-baef-da7de5b49130_86c7e78d-48e2-4414-9c99-60c5ca83c906-13944-cairo-skip-the-line-tickets---pyramids-of-giza-01.webp?auto=compress%2Cformat&rect=0%"
+      'imageUrl':"https://images.prismic.io/mystique/24d6af7e-53ba-47c4-baef-da7de5b49130_86c7e78d-"
+          "48e2-4414-9c99-60c5ca83c906-13944-cairo-skip-the-line-tickets---pyramids-of-giza-01.webp?auto=compress%2Cformat&rect=0%"
           "2C0%2C1200%2C750&w=540&h=750&q=75&fit=crop&ar=16%3A9&fm=pjpg&exp=-10"
     },
     {
@@ -16,11 +19,13 @@ class HomeScreen extends StatelessWidget {
     },
     {
       'name':"beach",
-      'imageUrl':"https://img.freepik.com/free-psd/travel-background-composition-with-palm-tree_23-2149603156.jpg?w=1380&t=st=1667918450~exp=1667919050~hmac=b510dee8a864a9eb26468b7d31238317070dbc546f2211ba8359d3a785d87bdb"
+      'imageUrl':"https://img.freepik.com/free-psd/travel-background-composition-with-palm-tree_23-"
+          "2149603156.jpg?w=1380&t=st=1667918450~exp=1667919050~hmac=b510dee8a864a9eb26468b7d31238317070dbc546f2211ba8359d3a785d87bdb"
     },
     {
       'name':"Traveling",
-      'imageUrl':"https://img.freepik.com/premium-psd/suitcase-with-airplane-traveler-accessories-essential-vacation-items-adventure-travel-holida_42098-452.jpg?w=996"
+      'imageUrl':"https://img.freepik.com/premium-psd/suitcase-with-airplane-traveler-accessories-"
+          "essential-vacation-items-adventure-travel-holida_42098-452.jpg?w=996"
     },
     {
       'name':"Archaeological Sites",
@@ -37,26 +42,7 @@ class HomeScreen extends StatelessWidget {
           "Tourism",
         ),
       ),
-      drawer: Drawer(
-        child: Column(
-          children:  [
-            DrawerHeader(
-              decoration: const BoxDecoration(color: Colors.amberAccent),
-              child: Center(
-                child: Text(
-                  "Tourism",
-                  style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 28.sp,
-                      fontWeight: FontWeight.bold),
-                ),
-              ),
-            ),
-            ///TODO: Add list items
-            const ListTile(),
-          ],
-        ),
-      ),
+      drawer: MyDrawer(),
       body: Padding(
         padding: EdgeInsets.all(15.sp),
         child: Column(
@@ -65,7 +51,9 @@ class HomeScreen extends StatelessWidget {
               child: ListView.separated(
                 physics: const BouncingScrollPhysics(),
                 itemBuilder: (BuildContext context, int index) {
-                  return DefaultContainer(item: categories[index],);
+                  return DefaultContainer(item: categories[index],onTap:(){
+                    Navigator.pushNamed(context, Routes.categoryPlaces);
+                  } ,);
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
@@ -81,4 +69,6 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
+
+
 

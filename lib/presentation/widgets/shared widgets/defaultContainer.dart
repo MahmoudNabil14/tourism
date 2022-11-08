@@ -7,16 +7,19 @@ class DefaultContainer extends StatelessWidget {
   const DefaultContainer({
     Key? key,
     required this.item,
+    required this.onTap,
   }) : super(key: key);
 
   final Map item;
+  final Function onTap;
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: (){
-        Navigator.pushNamed(context, Routes.categoryPlaces);
-      },
+       onTap:() {
+         onTap();
+      }
+      ,
       child: Container(
         height: 160.h,
         decoration: BoxDecoration(
