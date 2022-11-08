@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 import '../widgets/shared widgets/defaultContainer.dart';
 
@@ -11,7 +12,7 @@ class CategoryPlaces extends StatelessWidget {
       backgroundColor: Colors.white,
       appBar: AppBar(),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding:  EdgeInsets.all(15.sp),
         child: Column(
           children: [
             Expanded(
@@ -28,7 +29,7 @@ class CategoryPlaces extends StatelessWidget {
                   },
                   separatorBuilder: (context, index) {
                     return SizedBox(
-                      height: MediaQuery.of(context).size.height / 30,
+                      height: 25.h,
                     );
                   },
                   itemCount: 5),

@@ -18,7 +18,7 @@ class DefaultContainer extends StatelessWidget {
         Navigator.pushNamed(context, Routes.categoryPlaces);
       },
       child: Container(
-        height: 185.h,
+        height: 160.h,
         decoration: BoxDecoration(
             boxShadow: const [
               BoxShadow(
@@ -30,7 +30,7 @@ class DefaultContainer extends StatelessWidget {
                 image: NetworkImage(
                     item['imageUrl']),
                 fit: BoxFit.fill),
-            borderRadius: BorderRadius.circular(35)),
+            borderRadius: BorderRadius.circular(35.sp)),
         child: Center(
           child: Text(
             item['name'],

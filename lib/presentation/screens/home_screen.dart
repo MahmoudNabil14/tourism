@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../widgets/shared widgets/defaultContainer.dart';
 
 class HomeScreen extends StatelessWidget {
@@ -38,29 +39,26 @@ class HomeScreen extends StatelessWidget {
       ),
       drawer: Drawer(
         child: Column(
-          children: const [
+          children:  [
             DrawerHeader(
-              decoration: BoxDecoration(color: Colors.amberAccent),
+              decoration: const BoxDecoration(color: Colors.amberAccent),
               child: Center(
                 child: Text(
                   "Tourism",
                   style: TextStyle(
                       color: Colors.white,
-                      fontSize: 28,
+                      fontSize: 28.sp,
                       fontWeight: FontWeight.bold),
                 ),
               ),
             ),
-            ListTile(),
-            ListTile(),
-            ListTile(),
-            ListTile(),
-            ListTile(),
+            ///TODO: Add list items
+            const ListTile(),
           ],
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(15.0),
+        padding: EdgeInsets.all(15.sp),
         child: Column(
           children: [
             Expanded(
@@ -71,7 +69,7 @@ class HomeScreen extends StatelessWidget {
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(
-                  height: MediaQuery.of(context).size.height / 30,
+                  height: 25.h,
                   );
                 },
                 itemCount: categories.length,
