@@ -8,7 +8,7 @@ class PayerDetails extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(title: Text('Your Company')),
+      appBar: AppBar(),
       body: Padding(
         padding: const EdgeInsets.all(15.0),
         child: Column(
@@ -80,7 +80,23 @@ class PayerDetails extends StatelessWidget {
               ),
             ),
             Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
-            Text('•We ')
+            Text('•We will get there 10 am ',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Text('•Our jurreny begins 7 am',style: TextStyle(fontSize: 20),),
+            Spacer(),
+            Container(width: double.infinity,height: 50,
+              child: MaterialButton(onPressed: (){
+
+              },color: Colors.amber,child: Text('Request'),),
+            )
+
 
             ],
         ),
