@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tourism/presentation/widgets/place_widgets/payer.dart';
 
 import '../widgets/shared widgets/MyDrawer.dart';
 
@@ -31,12 +32,13 @@ class _PlaceState extends State<Place> {
           'https://img.freepik.com/premium-photo/student-picking-book-from-shelf-library_13339-106557.jpg?w=1380'
     }
   ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: MyDrawer(),
+      drawer: const MyDrawer(),
       appBar: AppBar(
-        title: Text('place'),
+        title: const Text('place'),
       ),
       backgroundColor: Colors.white,
       body: SingleChildScrollView(
@@ -54,7 +56,8 @@ class _PlaceState extends State<Place> {
               height: 100,
               width: double.infinity,
               child: Center(
-                child: ListView.separated(shrinkWrap: true,
+                child: ListView.separated(
+                    shrinkWrap: true,
                     scrollDirection: Axis.horizontal,
                     itemBuilder: (context, index) {
                       return GestureDetector(
@@ -84,33 +87,56 @@ class _PlaceState extends State<Place> {
                     itemCount: 3),
               ),
             ),
-            Text(
-              ' Description:',
-              style: TextStyle(
-                fontSize: 30.sp,
-                fontWeight: FontWeight.bold,
+            Center(
+              child: Text(
+                ' Description',
+                style: TextStyle(
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
             ),
-            Divider(
-              color: Colors.black,
-              height: 10.h,
-              endIndent: 200,
-              thickness: 3,
-              indent: 8,
-            ),
-            Container(margin: const EdgeInsets.all(15),child: Text('The Great Library of Alexandria in Alexandria, Egypt, was one of the largest and most significant libraries of the ancient world.'
+
+            Container(
+              margin: const EdgeInsets.all(15),
+              child: const Text(
+                'The Great Library of Alexandria in Alexandria, Egypt, was one of the largest and most significant libraries of the ancient world.'
                 ' The Library was part of a larger research institution called the Mouseion, which was dedicated to the Muses, the nine goddesses of the arts.[10] The idea of a universal library'
                 ' in Alexandria may have been proposed by Demetrius of Phalerum, an exiled Athenian statesman living in Alexandria, to Ptolemy I Soter, who may have established plans for the Library,'
                 ' but the Library itself was probably not built until the reign of his son Ptolemy II Philadelphus. The Library quickly acquired many papyrus scrolls, owing largely to the Ptolemaic '
-                'kings\' aggressive and well-funded policies for procuring texts.',style: TextStyle(fontSize: 20),),
+                'kings\' aggressive and well-funded policies for procuring texts.',
+                style: TextStyle(fontSize: 20),
+              ),
             ),
-            // ElevatedButton(onPressed: (){
-            //
-            // }, child: Container(
-            //   width: double.infinity,
-            //   height: 20.h,
-            //   child: ,
-            // ))
+
+            Center(
+              child: Text(
+                ' Offered By',
+                style: TextStyle(
+                  fontSize: 30.sp,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            Container(
+              height: MediaQuery.of(context).size.height / 2,
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(20),
+                  color: Colors.grey[200]),
+              margin: const EdgeInsets.all(15),
+              padding: const EdgeInsets.all(15),
+              child: ListView.separated(
+                itemBuilder: (context, index) {
+                  return const Payer();
+                },
+                separatorBuilder: (context, index) {
+                  return const SizedBox(height: 20);
+                },
+                itemCount: 10,
+                physics: const BouncingScrollPhysics(),
+                shrinkWrap: true,
+              ),
+            )
           ],
         ),
       ),
