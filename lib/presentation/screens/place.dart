@@ -12,6 +12,7 @@ class Place extends StatefulWidget {
 }
 
 class _PlaceState extends State<Place> {
+
   String bigPhoto =
       'https://www.luxorandaswan.com/photos/old/2019/07/Alexandria-Library-Egypt-2.jpg';
   List<Map> places = [
@@ -36,7 +37,7 @@ class _PlaceState extends State<Place> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: const MyDrawer(),
+
       appBar: AppBar(
         title: const Text('place'),
       ),

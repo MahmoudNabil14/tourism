@@ -10,7 +10,7 @@ class MyDrawer extends StatelessWidget {
   Widget build(BuildContext context) {
     return Drawer(
       child: Column(
-        children:  [
+        children: [
           DrawerHeader(
             decoration: const BoxDecoration(color: Colors.amberAccent),
             child: Center(
@@ -23,15 +23,50 @@ class MyDrawer extends StatelessWidget {
               ),
             ),
           ),
-          SizedBox(height: 20,),
-
-          InkWell(onTap: (){},child: const ListTile(title: Text('Account'),leading: Icon(Icons.person),trailing: Icon(Icons.arrow_forward_ios) ,style: ListTileStyle.list,)),
-          SizedBox(height: 20,),
-          InkWell(onTap: (){},child: const ListTile(title: Text('My Trips'),leading: Icon(Icons.card_travel),trailing: Icon(Icons.arrow_forward_ios) ,style: ListTileStyle.list,)),
-          SizedBox(height: 20,),
-          InkWell(onTap: (){},child: const ListTile(title: Text('Language'),leading: Icon(Icons.language_outlined),trailing: Icon(Icons.arrow_forward_ios) ,style: ListTileStyle.list,)),
-          SizedBox(height: 20,),
-          InkWell(onTap: (){},child: const ListTile(title: Text('About Us'),leading: Icon(Icons.info_outlined),trailing: Icon(Icons.arrow_forward_ios) ,style: ListTileStyle.list,)),
+          SizedBox(
+            height: 20,
+          ),
+          InkWell(
+              onTap: () {},
+              child: const ListTile(
+                title: Text('Account'),
+                leading: Icon(Icons.person),
+                trailing: Icon(Icons.arrow_forward_ios),
+                style: ListTileStyle.list,
+              )),
+          SizedBox(
+            height: 20,
+          ),
+          InkWell(
+              onTap: () {},
+              child: const ListTile(
+                title: Text('My Trips'),
+                leading: Icon(Icons.card_travel),
+                trailing: Icon(Icons.arrow_forward_ios),
+                style: ListTileStyle.list,
+              )),
+          SizedBox(
+            height: 20,
+          ),
+          InkWell(
+              onTap: () {},
+              child: const ListTile(
+                title: Text('Language'),
+                leading: Icon(Icons.language_outlined),
+                trailing: Icon(Icons.arrow_forward_ios),
+                style: ListTileStyle.list,
+              )),
+          SizedBox(
+            height: 20,
+          ),
+          InkWell(
+              onTap: () {},
+              child: const ListTile(
+                title: Text('About Us'),
+                leading: Icon(Icons.info_outlined),
+                trailing: Icon(Icons.arrow_forward_ios),
+                style: ListTileStyle.list,
+              )),
         ],
       ),
     );

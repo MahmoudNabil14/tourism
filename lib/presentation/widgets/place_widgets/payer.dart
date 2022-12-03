@@ -7,7 +7,7 @@ class Payer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(onTap: (){
-Navigator.pushNamed(context, Routes.PayerDetails);
+Navigator.pushNamed(context, Routes.payerDetails);
 
     },
       child: PhysicalModel(elevation: 5,color: Colors.grey[300]!,borderRadius: BorderRadius.circular(20),

@@ -8,7 +8,7 @@ ThemeData lightTheme = ThemeData(
       elevation: 0.0,
     titleTextStyle: TextStyle(color: Colors.amber, fontSize: 28.sp),
     iconTheme: const IconThemeData(
-      color: Colors.amber
-    )
+      color: Colors.black
+    ),
   ),
 );
