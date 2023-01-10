@@ -14,19 +14,8 @@ class FavScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider(
-          create: (BuildContext context) {
-            return FavouritesCubit()..getFavourites();
-          },
-        ),
-        BlocProvider(
-          create: (BuildContext context) {
-            return PlacesCubit();
-          },
-        ),
-      ],
+    return BlocProvider(
+      create: (context){return FavouritesCubit()..getFavourites();},
       child: Scaffold(
         body: BlocBuilder<FavouritesCubit, FavouritesStates>(
           builder: (context, state) {
