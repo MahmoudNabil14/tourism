@@ -56,14 +56,17 @@ class PayerDetails extends StatelessWidget {
                     const SizedBox(
                       width: 8,
                     ),
-                    GestureDetector(onTap: () {
-                      final Uri mapurl =
-                      Uri.parse('https://www.google.com/maps?q=${myoffer['address']}');
-                      launchUrl(mapurl,mode: LaunchMode.externalApplication);
-                    },
-                      child: Text(
-                        myoffer['address'],overflow: TextOverflow.fade,
-                        style:  TextStyle(fontSize: 16.sp, color: Colors.black),
+                    Expanded(
+                      child: GestureDetector(onTap: () {
+                        final Uri mapurl =
+                        Uri.parse('https://www.google.com/maps?q=${myoffer['address']}');
+                        launchUrl(mapurl,mode: LaunchMode.externalApplication);
+                      },
+                        child: Text(
+                          myoffer['address'],overflow: TextOverflow.ellipsis,
+                          maxLines: 1,
+                          style:  TextStyle(fontSize: 16.sp, color: Colors.black),
+                        ),
                       ),
                     ),
                   ],

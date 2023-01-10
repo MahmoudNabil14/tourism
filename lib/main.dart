@@ -3,12 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourism/business_logic/categories_cubit/categories_cubit.dart';
+import 'package:tourism/business_logic/places_cubit/places_cubit.dart';
 import 'package:tourism/presentation/router/app_router.dart';
 import 'package:tourism/presentation/styles/themes.dart';
 
 import 'bloc_observer.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   Bloc.observer = AppBlocObserver();
@@ -23,8 +24,17 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: (BuildContext context, Widget? child) {
-        return BlocProvider(
-          create: (BuildContext context) { return CategoriesCubit()..getCategories(); },
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(create: (context) {
+              return CategoriesCubit()..getCategories();
+            }),
+            BlocProvider(
+              lazy: false,
+                create: (context) {
+              return PlacesCubit()..getAllPlaces();
+            }),
+          ],
           child: MaterialApp(
             theme: lightTheme,
             debugShowCheckedModeBanner: false,
@@ -36,4 +46,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-

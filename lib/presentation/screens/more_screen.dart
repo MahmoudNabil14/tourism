@@ -29,7 +29,7 @@ final Uri url=Uri.parse('https://docs.google.com/forms/d/e/1FAIpQLSdrYOACHio_3Of
         ),
         InkWell(
             onTap: () {
-              Navigator.pushNamed(context, Routes.Aboutus);
+              Navigator.pushNamed(context, Routes.aboutUs);
             },
             child: const ListTile(
               title: Text('About Us'),

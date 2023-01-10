@@ -9,40 +9,67 @@ class PlacesCubit extends Cubit<PlacesStates> {
     return BlocProvider.of(context);
   }
 
-  List<Map<String, dynamic>> places = [];
+  List<Map<String, dynamic>> categoryPlaces = [];
+  List<Map<String, dynamic>> allPlaces = [];
 
-  Future<void> getPlaces({required String categoryID}) async {
+  Future<void> getCategoryPlaces({required String categoryID}) async {
     await FirebaseFirestore.instance
         .collection('categories')
         .doc(categoryID)
         .collection('places')
         .get()
         .then((value) {
-      places = [];
+      categoryPlaces = [];
       for (var element in value.docs) {
         Map<String, dynamic> place = element.data();
         //to add category id to each category in the list
         place['placeId'] = element.id;
         place['categoryId'] = categoryID;
-        places.add(place);
+        categoryPlaces.add(place);
       }
-      emit(GetPlacesSuccessState());
+      emit(GetCategoryPlacesSuccessState());
     }).catchError((error) {
-      emit(GetPlacesErrorState());
+      emit(GetCategoryPlacesErrorState());
+    });
+  }
+
+  Future<void> getAllPlaces() async {
+    emit(GetAllPlacesLoadingState());
+    await FirebaseFirestore.instance
+        .collection('categories')
+        .get()
+        .then((categoriesList)async {
+          for(var category in categoriesList.docs) {
+            await FirebaseFirestore.instance
+                .collection('categories')
+                .doc(category.id)
+                .collection('places')
+                .get().then((categoryPlaces){
+              for (var element in categoryPlaces.docs) {
+                Map<String, dynamic> place = element.data();
+                place['placeId'] = element.id;
+                place['categoryId'] = element.id;
+                allPlaces.add(place);
+              }
+            });
+          }
+      emit(GetAllPlacesSuccessState());
+    }).catchError((error) {
+      emit(GetAllPlacesErrorState());
     });
   }
 
   void fav({
     required int index,
   }) async {
-    places[index]['isItFav'] = !places[index]['isItFav'];
+    categoryPlaces[index]['isItFav'] = !categoryPlaces[index]['isItFav'];
 
     FirebaseFirestore.instance
         .collection("categories")
-        .doc(places[index]["categoryId"])
+        .doc(categoryPlaces[index]["categoryId"])
         .collection("places")
-        .doc(places[index]['placeId'])
-        .update({"isItFav": places[index]['isItFav']});
+        .doc(categoryPlaces[index]['placeId'])
+        .update({"isItFav": categoryPlaces[index]['isItFav']});
     emit(ChangeToFav());
   }
 }

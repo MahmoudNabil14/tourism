@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tourism/presentation/screens/About_us_screen.dart';
 import 'package:tourism/presentation/screens/loading_screen.dart';
 import 'package:tourism/presentation/screens/request_screen.dart';
+import 'package:tourism/presentation/screens/search_screen.dart';
 import 'package:tourism/presentation/screens/terms_and_condions_screen.dart';
 import '../screens/category_places.dart';
 import '../screens/home_layout.dart';
@@ -14,9 +15,10 @@ class Routes {
   static const String place = '/place';
   static const String payerDetails = '/PayerDetails';
   static const String homeLayout = '/HomeLayout';
-  static const String Aboutus = '/Aboutus';
+  static const String aboutUs = '/Aboutus';
   static const String terms = '/Terms';
   static const String request = '/Request';
+  static const String search = '/Search';
 }
 
 class AppRouter {
@@ -46,12 +48,14 @@ class AppRouter {
         return MaterialPageRoute(builder: (context) =>  PayerDetails(myoffer: routeArguments!['myoffer'],tripName: routeArguments['tripName'],));
       case (Routes.homeLayout):
         return MaterialPageRoute(builder: (context) => const HomeLayout());
-      case (Routes.Aboutus):
+      case (Routes.aboutUs):
         return MaterialPageRoute(builder: (context) => const Aboutus());
       case (Routes.terms):
         return MaterialPageRoute(builder: (context) => const Terms());
       case (Routes.request):
         return MaterialPageRoute(builder: (context) =>  Request(tripname: routeArguments!['tripname'], name: routeArguments['name'],));
+        case (Routes.search):
+        return MaterialPageRoute(builder: (context) =>   const SearchScreen());
       default:
         return null;
     }
