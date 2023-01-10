@@ -7,59 +7,34 @@ import '../router/app_router.dart';
 import '../widgets/shared widgets/defaultContainer.dart';
 
 class Categories extends StatelessWidget {
-  Categories({Key? key}) : super(key: key);
-  // final List<Map> categories = [
-  //   {
-  //     'name': "Coastal Excursions",
-  //     'imageUrl': "https://images.prismic.io/mystique/24d6af7e-53ba-47c4-baef-da7de5b49130_86c7e78d-"
-  //         "48e2-4414-9c99-60c5ca83c906-13944-cairo-skip-the-line-tickets---pyramids-of-giza-01.webp?auto=compress%2Cformat&rect=0%"
-  //         "2C0%2C1200%2C750&w=540&h=750&q=75&fit=crop&ar=16%3A9&fm=pjpg&exp=-10"
-  //   },
-  //   {
-  //     'name': "Archaeological Sites",
-  //     'imageUrl':
-  //         "https://www.visitgreece.gr/files/filippini_14-53_monuments-sounio_723x723.jpg"
-  //   },
-  //   {
-  //     'name': "beach",
-  //     'imageUrl':
-  //         "https://img.freepik.com/free-psd/travel-background-composition-with-palm-tree_23-"
-  //             "2149603156.jpg?w=1380&t=st=1667918450~exp=1667919050~hmac=b510dee8a864a9eb26468b7d31238317070dbc546f2211ba8359d3a785d87bdb"
-  //   },
-  //   {
-  //     'name': "Traveling",
-  //     'imageUrl':
-  //         "https://img.freepik.com/premium-psd/suitcase-with-airplane-traveler-accessories-"
-  //             "essential-vacation-items-adventure-travel-holida_42098-452.jpg?w=996"
-  //   },
-  //   {
-  //     'name': "Archaeological Sites",
-  //     'imageUrl':
-  //         "https://www.visitgreece.gr/files/filippini_14-53_monuments-sounio_723x723.jpg"
-  //   },
-  // ];
+  const Categories({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (BuildContext context) {
-        return CategoriesCubit()..getCategories();
-      },
-      child: Padding(
-        padding: EdgeInsets.all(15.sp),
-        child: Column(
-          children: [
-            Expanded(
-              child: BlocConsumer<CategoriesCubit, CategoriesStates>(
-                listener: (BuildContext context, Object? state) {},
-                builder: (BuildContext context, state) {return ListView.separated(
+    return Padding(
+      padding: EdgeInsets.all(15.sp),
+      child: Column(
+        children: [
+          Expanded(
+            child: BlocConsumer<CategoriesCubit, CategoriesStates>(
+              listener: (BuildContext context, Object? state) {},
+              builder: (BuildContext context, state) {
+                return ListView.separated(
                   physics: const BouncingScrollPhysics(),
                   itemBuilder: (BuildContext context, int index) {
-                    return DefaultContainer(isittrip: false,
-                      item: CategoriesCubit.get(context).categories[index],
+                    return DefaultContainer(
+                      isittrip: false,
+                      place: CategoriesCubit.get(context).categories[index],
                       onTap: () {
-                        Navigator.pushNamed(context, Routes.categoryPlaces);
-                      }, index: index,
+                        Navigator.pushNamed(context, Routes.categoryPlaces,
+                            arguments: {
+                              "categoryId": CategoriesCubit.get(context)
+                                  .categories[index]['categoryId'],"name" :
+                              CategoriesCubit.get(context)
+                                  .categories[index]['name']
+                            });
+                      },
+                      index: index,
                     );
                   },
                   separatorBuilder: (BuildContext context, int index) {
@@ -68,11 +43,11 @@ class Categories extends StatelessWidget {
                     );
                   },
                   itemCount: CategoriesCubit.get(context).categories.length,
-                );},
-              ),
-            )
-          ],
-        ),
+                );
+              },
+            ),
+          )
+        ],
       ),
     );
   }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tourism/business_logic/layout_cubit/layout_cubit.dart';
 import 'package:tourism/business_logic/layout_cubit/layout_states.dart';
-import '../widgets/shared widgets/MyDrawer.dart';
 
 class HomeLayout extends StatelessWidget {
   const HomeLayout({Key? key}) : super(key: key);
@@ -20,12 +20,12 @@ class HomeLayout extends StatelessWidget {
             appBar: AppBar(
               backgroundColor: const Color(0xFFFCE44D),
               centerTitle: true,
-              title: const Hero(
+              title:  Hero(
                 tag: 'logo',
                 child: Image(
-                    width: 125,
-                    height: 75,
-                    image: AssetImage('images/logo.png'),
+                    width: 125.w,
+                    height: 75.h,
+                    image: const AssetImage('images/logo.png'),
                     fit: BoxFit.fill),
               ),
             ),

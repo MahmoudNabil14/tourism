@@ -1,74 +1,86 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tourism/business_logic/layout_cubit/layout_cubit.dart';
-import 'package:tourism/business_logic/layout_cubit/layout_states.dart';
+import 'package:tourism/business_logic/places_cubit/places_cubit.dart';
+import 'package:tourism/business_logic/places_cubit/places_states.dart';
 import '../router/app_router.dart';
 import '../widgets/shared widgets/defaultContainer.dart';
 
-class CategoryPlaces extends StatefulWidget {
-  const CategoryPlaces({Key? key}) : super(key: key);
+class CategoryPlaces extends StatelessWidget {
+  const CategoryPlaces({
+    Key? key,
+    required this.categoryID,
+    required this.name
+  }) : super(key: key);
+  final String categoryID;
+  final String name;
 
-  @override
-  State<CategoryPlaces> createState() => _CategoryPlacesState();
-}
-
-class _CategoryPlacesState extends State<CategoryPlaces> {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) {
-        return LayoutCubit();
-      } ,
-      child: BlocConsumer<LayoutCubit, LayoutStates>(
-        listener: (context, state) {},
-        builder: (context, state) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: AppBar(),
-            body: Padding(
-              padding: EdgeInsets.all(15.sp),
-              child: Column(
-                children: [
-                  Expanded(
-                    child: BlocBuilder<LayoutCubit, LayoutStates>(
-                      builder: (context, state) {
-                        return ListView.separated(
-                            physics: const BouncingScrollPhysics(),
-                            itemBuilder: (context, index) {
-                              return DefaultContainer(
-                                isittrip: true,
-                                item: {
-                                  'name': LayoutCubit.get(context).trips[index]
-                                      ['name'],
-                                  "imageUrl": 'https://img.freepik.com/free-psd/travel-background-'
-                                      'composition-with-lifeline_23-214960316'
-                                      '0.jpg?w=1380&t=st=1667920454~exp=1667921054~hmac='
-                                      'd4597babcd0bbb7c327ede40f832b7345c35bde4b287e55f9f30697933f1b27b'
-                                },
-                                onTap: () {
-                                  Navigator.pushNamed(
-                                    context,
-                                    Routes.place,
-                                  );
-                                },
-                                index: index,
+      create: (context) => PlacesCubit()..getPlaces(categoryID: categoryID),
+      child: Scaffold(
+        backgroundColor: Colors.white,
+        appBar: AppBar(title: Text(name),),
+
+        body: Padding(
+          padding: EdgeInsets.all(15.sp),
+          child: Column(
+            children: [
+              Expanded(
+                child: BlocBuilder<PlacesCubit, PlacesStates>(
+                  builder: (context, state) {
+                    return ListView.separated(
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) {
+                          return DefaultContainer(
+                            isittrip: true,
+                            place: {
+                              'name': PlacesCubit.get(context).places[index]
+                                  ['name'],
+                              "imageUrl": PlacesCubit.get(context).places[index]
+                                  ['imageUrl'],
+                              "isItFav": PlacesCubit.get(context).places[index]
+                                  ['isItFav']
+                            },
+                            onTap: () {
+                              Navigator.pushNamed(
+                                context,
+                                Routes.place,arguments: {
+                                "placeId": PlacesCubit.get(context)
+                                    .places[index]['placeId'],"name" :
+                                PlacesCubit.get(context)
+                                    .places[index]['name'],"description" :
+                                PlacesCubit.get(context)
+                                    .places[index]['description'],"imageUrl" :
+                                PlacesCubit.get(context)
+                                    .places[index]['imageUrl'],"images" :
+                                PlacesCubit.get(context)
+                                    .places[index]['images'],
+                                "offers" :
+                                PlacesCubit.get(context)
+                                    .places[index]['offers'],
+                              }
                               );
                             },
-                            separatorBuilder: (context, index) {
-                              return SizedBox(
-                                height: 25.h,
-                              );
+                            index: index,
+                            iconOnPressed: () {
+                              PlacesCubit.get(context).fav(index: index);
                             },
-                            itemCount: LayoutCubit.get(context).trips.length);
-                      },
-                    ),
-                  ),
-                ],
+                          );
+                        },
+                        separatorBuilder: (context, index) {
+                          return SizedBox(
+                            height: 25.h,
+                          );
+                        },
+                        itemCount: PlacesCubit.get(context).places.length);
+                  },
+                ),
               ),
-            ),
-          );
-        },
+            ],
+          ),
+        ),
       ),
     );
   }

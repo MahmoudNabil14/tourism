@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:tourism/business_logic/categories_cubit/categories_cubit.dart';
 import 'package:tourism/presentation/router/app_router.dart';
 import 'package:tourism/presentation/styles/themes.dart';
 
@@ -22,11 +23,14 @@ class MyApp extends StatelessWidget {
     return ScreenUtilInit(
       minTextAdapt: true,
       builder: (BuildContext context, Widget? child) {
-        return MaterialApp(
-          theme: lightTheme,
-          debugShowCheckedModeBanner: false,
-          onGenerateRoute: AppRouter.onGeneratedRoute,
-          initialRoute: Routes.initialRoute,
+        return BlocProvider(
+          create: (BuildContext context) { return CategoriesCubit()..getCategories(); },
+          child: MaterialApp(
+            theme: lightTheme,
+            debugShowCheckedModeBanner: false,
+            onGenerateRoute: AppRouter.onGeneratedRoute,
+            initialRoute: Routes.initialRoute,
+          ),
         );
       },
     );

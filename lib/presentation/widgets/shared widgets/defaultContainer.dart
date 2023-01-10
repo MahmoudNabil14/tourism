@@ -1,19 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tourism/business_logic/layout_cubit/layout_cubit.dart';
+
 
 class DefaultContainer extends StatelessWidget {
   DefaultContainer(
       {Key? key,
-      required this.item,
+      required this.place,
       required this.onTap,
       required this.isittrip,
-      required this.index})
+      required this.index, this.iconOnPressed})
       : super(key: key);
 
-  final Map item;
+  final Map place;
   final int index;
   final Function onTap;
+  Function? iconOnPressed;
   bool isittrip = false;
 
   // bool IsItMyFav=false;
@@ -34,7 +35,7 @@ class DefaultContainer extends StatelessWidget {
               ),
             ],
             image: DecorationImage(
-                image: NetworkImage(item['imageUrl']), fit: BoxFit.fill),
+                image: NetworkImage(place['imageUrl']), fit: BoxFit.fill),
             borderRadius: BorderRadius.circular(35.sp)),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
@@ -45,18 +46,18 @@ class DefaultContainer extends StatelessWidget {
               Padding(
                 padding: const EdgeInsets.all(15.0),
                 child: IconButton(
-                  icon: LayoutCubit.get(context).trips[index]['isItFav']
+                  icon: place['isItFav']
                       ? const Icon(Icons.favorite)
                       : const Icon(Icons.favorite_border),
                   color: Colors.amber,
                   onPressed: () {
-                    LayoutCubit.get(context).fav(index: index);
+                    iconOnPressed!();
                   },
                 ),
               ),
             Center(
               child: Text(
-                item['name'],
+                place['name'],
                 style: TextStyle(
                   color: Colors.white,
                   fontSize: 28.sp,

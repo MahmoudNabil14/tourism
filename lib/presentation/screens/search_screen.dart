@@ -9,15 +9,17 @@ class SearchScreen extends StatelessWidget {
       // appBar: AppBar(,title: Text('Search')),
       body: Padding(
         padding: const EdgeInsets.all(30.0),
-        child: TextField(cursorColor: Colors.grey,
+        child: TextField(
+            cursorColor: Colors.grey,
             decoration: InputDecoration(
+                hintText: "Search By Name",
                 focusedBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(color: Colors.amber)),
+                    borderSide: const BorderSide(color: Colors.amber)),
                 enabledBorder: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50),
-                    borderSide: BorderSide(color: Colors.amber)),
-                prefixIcon: Icon(Icons.search,color: Colors.amber),
+                    borderSide: const BorderSide(color: Colors.amber)),
+                prefixIcon: const Icon(Icons.search, color: Colors.amber),
                 border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(50))),
             maxLines: 1,
