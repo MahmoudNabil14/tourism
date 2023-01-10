@@ -34,7 +34,6 @@ class PlacesCubit extends Cubit<PlacesStates> {
   }
 
   Future<void> getAllPlaces() async {
-    emit(GetAllPlacesLoadingState());
     await FirebaseFirestore.instance
         .collection('categories')
         .get()
